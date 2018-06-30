@@ -26,6 +26,7 @@ def barb(user_id, user_profiles):
     best_size = -1
     best_img = None
     best_intersect = None
+    best_loc = None
     for i, other_user in enumerate(user_profiles):
         if user_id != i:
             other_images = other_user[4]
@@ -37,9 +38,10 @@ def barb(user_id, user_profiles):
                 if len(intersect_keyword) > best_size:
                     best_size = len(intersect_keyword)
                     best_intersect = intersect_keyword
+                    best_loc = other_user[2]
                     best_img = img[0]
 
-    return curr_user[2], best_img, best_intersect
+    return curr_user[2], best_loc, best_img, best_intersect
 
 
 print(barb(0, user_profiles))
