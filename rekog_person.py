@@ -33,11 +33,17 @@ def get_keywords(person):
     tmp = []
     for im in ll:
         im = os.path.basename(im)
-        tmp.extend(detect_labels(BUCKET, os.path.join(person, im)))
+        _ = []
+        _.append(im)
+        tt=detect_labels(BUCKET, os.path.join(person, im))
+        # print(_)
+        tt = [e['Name'] for e in tt if e['Name'] not in ['Human', 'People', 'Person']]    
+        _.extend(tt)
+        tmp.append(_)
 
-    ret = [e['Name'] for e in tmp if e['Name'] not in ['Human', 'People', 'Person']]    
+    # ret = [e['Name'] for e in tmp if e['Name'] not in ['Human', 'People', 'Person']]    
 
-    return ret
+    return tmp
 
 def syn():
     syn_image = 'aws s3 sync image s3://{}'.format(BUCKET)
